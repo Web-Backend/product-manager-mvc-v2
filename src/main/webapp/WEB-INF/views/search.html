@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+</head>
+<body>
+<p>
+    <a th:href="@{/product}">
+        Back to product list
+    </a>
+</p>
+<div th:if="${success}">
+    <h1 style="color: red" th:text="${success}"></h1>
+</div>
+<div id="form">
+    <form th:action="@{/product/result}" novalidate="novalidate" method="POST" th:object="${product}">
+        <label>Input name: </label>
+        <input type="text" name="nameSearch">
+        <input type="submit" value="Search">
+    </form>
+</div>
+<div>Your result: </div>
+
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>
