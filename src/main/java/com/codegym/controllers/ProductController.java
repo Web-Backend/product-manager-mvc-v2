@@ -25,7 +25,7 @@ public class ProductController {
 
     @PostMapping("product/save")
     public ModelAndView save(Product product) {
-        product.setId((int) (Math.random()*99999));
+        product.setId((int) (Math.random() * 99999));
         productService.save(product);
         ModelAndView modelAndView = new ModelAndView("index", "products", this.productService.findAll());
         modelAndView.addObject("success", "Created successfully");
@@ -61,5 +61,10 @@ public class ProductController {
     @GetMapping("/product/{id}/view")
     public ModelAndView view(Product product) {
         return new ModelAndView("view", "product", productService.findById(product.getId()));
+    }
+
+    @GetMapping("/product/search")
+    public ModelAndView search() {
+        return new ModelAndView("search");
     }
 }
