@@ -7,7 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ProductController {
@@ -67,4 +71,18 @@ public class ProductController {
     public ModelAndView search() {
         return new ModelAndView("search");
     }
+
+    @PostMapping("/product/result")
+    public ModelAndView result(@RequestParam String nameSearch) {
+        List<Product> products = new ArrayList<>();
+        for (int i = 0; i < productService.findAll().size(); i++) {
+            if (nameSearch.equalsIgnoreCase(productService.findAll().get(i).getName())) {
+                products.add(productService.findAll().get(i));
+            }
+        }
+        ModelAndView modelAndView = new ModelAndView("index", "products", products);
+        modelAndView.addObject("success", "?????");
+        return modelAndView;
+    }
+
 }
